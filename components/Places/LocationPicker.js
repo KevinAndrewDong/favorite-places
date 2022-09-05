@@ -2,6 +2,7 @@ import OutlinedButton from "../UI/OutlinedButton";
 import { Alert, View, StyleSheet, Text, Image } from "react-native";
 import { Colors } from "../../constants/colors";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   getCurrentPositionAsync,
   useForegroundPermissions,
@@ -11,6 +12,8 @@ import { getMapPreview } from "../../util/location";
 
 function LocationPicker() {
   const [pickedLocation, setPickedLocation] = useState();
+
+  const navigation = useNavigation();
 
   const [locationPermissionInformation, requestPermission] =
     useForegroundPermissions();
@@ -44,7 +47,9 @@ function LocationPicker() {
     });
   }
 
-  function pickOnMapHandler() {}
+  function pickOnMapHandler() {
+    navigation.navigate("Map");
+  }
 
   let locationPreview = <Text>未定位</Text>;
   if (pickedLocation) {
