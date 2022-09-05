@@ -1,12 +1,4 @@
-import {
-  Alert,
-  Button,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  LogBox,
-} from "react-native";
+import { Alert, Image, StyleSheet, Text, View } from "react-native";
 import {
   launchCameraAsync,
   useCameraPermissions,
@@ -15,8 +7,7 @@ import {
 import { useState } from "react";
 
 import { Colors } from "../../constants/colors";
-
-LogBox.ignoreLogs(["Remote debugger"]);
+import OutlinedButton from "../UI/OutlinedButton";
 
 function ImagePicker() {
   const [pickedImage, setPickedImage] = useState();
@@ -54,14 +45,16 @@ function ImagePicker() {
     setPickedImage(image.uri);
   }
 
-  let imagePreview = <Text>没有照片</Text>;
+  let imagePreview = <Text>无照片</Text>;
   if (pickedImage) {
     imagePreview = <Image style={styles.image} source={{ uri: pickedImage }} />;
   }
   return (
     <View>
       <View style={styles.imagePreview}>{imagePreview}</View>
-      <Button title="拍照" onPress={takeImageHandler} />
+      <OutlinedButton icon="camera" onPress={takeImageHandler}>
+        拍照
+      </OutlinedButton>
     </View>
   );
 }
@@ -77,6 +70,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.primary100,
     borderRadius: 4,
+    overflow: "hidden",
   },
   image: {
     width: "100%",

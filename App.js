@@ -25,7 +25,7 @@ export default function App() {
             name="AllPlaces"
             component={AllPlaces}
             options={({ navigation }) => ({
-              title: "您最喜欢的地点",
+              title: "相册",
               headerRight: ({ tintColor }) => (
                 <IconButton
                   icon="add"
