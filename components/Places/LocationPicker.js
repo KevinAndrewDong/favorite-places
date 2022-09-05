@@ -1,8 +1,12 @@
 import OutlinedButton from "../UI/OutlinedButton";
 import { Alert, View, StyleSheet, Text, Image } from "react-native";
 import { Colors } from "../../constants/colors";
-import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useState, useEffect } from "react";
+import {
+  useNavigation,
+  useRoute,
+  useIsFocused,
+} from "@react-navigation/native";
 import {
   getCurrentPositionAsync,
   useForegroundPermissions,
@@ -12,11 +16,23 @@ import { getMapPreview } from "../../util/location";
 
 function LocationPicker() {
   const [pickedLocation, setPickedLocation] = useState();
+  const isFocused = useIsFocused();
 
   const navigation = useNavigation();
+  const route = useRoute();
 
   const [locationPermissionInformation, requestPermission] =
     useForegroundPermissions();
+
+  useEffect(() => {
+    if (isFocused && route.params) {
+      const mapPickedLocation = route.params && {
+        lat: route.params.pickedLat,
+        lng: route.params.pickedLng,
+      };
+      setPickedLocation(mapPickedLocation);
+    }
+  }, [route, isFocused]);
 
   async function verifyPermissions() {
     if (
@@ -26,10 +42,7 @@ function LocationPicker() {
       return permissionResponse.granted;
     }
     if (locationPermissionInformation.status === PermissionStatus.DENIED) {
-      Alert.alert(
-        "Insufficient Permissions!",
-        "You need to grant location permissions to use this app."
-      );
+      Alert.alert("无权限", "您需要打开定位权限，以继续使用");
       return false;
     }
     return true;

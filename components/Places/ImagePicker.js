@@ -21,10 +21,7 @@ function ImagePicker() {
       return permissionResponse.granted;
     }
     if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
-      Alert.alert(
-        "Insufficient Permissions!",
-        "You need to grant camera permissions to use this app."
-      );
+      Alert.alert("无权限", "您需要打开相机权限，以继续使用本app");
       return false;
     }
     return true;
