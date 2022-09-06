@@ -12,9 +12,9 @@ import {
   useForegroundPermissions,
   PermissionStatus,
 } from "expo-location";
-import { getMapPreview } from "../../util/location";
+import { getMapPreview, getAddress } from "../../util/location";
 
-function LocationPicker() {
+function LocationPicker({ onPickLocation }) {
   const [pickedLocation, setPickedLocation] = useState();
   const isFocused = useIsFocused();
 
@@ -33,6 +33,19 @@ function LocationPicker() {
       setPickedLocation(mapPickedLocation);
     }
   }, [route, isFocused]);
+
+  useEffect(() => {
+    async function handleLocation() {
+      if (pickedLocation) {
+        const address = await getAddress(
+          pickedLocation.lng,
+          pickedLocation.lat
+        );
+        onPickLocation({ ...pickedLocation, address: address });
+      }
+    }
+    handleLocation();
+  }, [pickedLocation, onPickLocation]);
 
   async function verifyPermissions() {
     if (
@@ -53,7 +66,7 @@ function LocationPicker() {
     if (!hasPermission) return;
 
     const location = await getCurrentPositionAsync();
-    console.log(location);
+    //console.log(location);
     setPickedLocation({
       lng: location.coords.longitude,
       lat: location.coords.latitude,
@@ -72,7 +85,6 @@ function LocationPicker() {
         source={{ uri: getMapPreview(pickedLocation.lng, pickedLocation.lat) }}
       />
     );
-    console.log(locationPreview);
   }
 
   return (
