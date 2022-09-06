@@ -74,7 +74,10 @@ function LocationPicker({ onPickLocation }) {
   }
 
   function pickOnMapHandler() {
-    navigation.navigate("Map");
+    navigation.navigate("Map", {
+      lng: pickedLocation.lng,
+      lat: pickedLocation.lat,
+    });
   }
 
   let locationPreview = <Text>未定位</Text>;

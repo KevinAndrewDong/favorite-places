@@ -7,6 +7,7 @@ import AddPlace from "./screens/AddPlace";
 import IconButton from "./components/UI/IconButton";
 import { Colors } from "./constants/colors";
 import Map from "./screens/Map";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -25,7 +26,7 @@ export default function App() {
             name="AllPlaces"
             component={AllPlaces}
             options={({ navigation }) => ({
-              title: "相册",
+              title: "最喜欢的地点",
               headerRight: ({ tintColor }) => (
                 <IconButton
                   icon="add"

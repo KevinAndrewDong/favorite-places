@@ -4,14 +4,16 @@ import MapView, { Marker } from "react-native-maps";
 import { NativeScreenNavigationContainer } from "react-native-screens";
 import IconButton from "../components/UI/IconButton";
 
-function Map({ navigation }) {
+function Map({ route, navigation }) {
   const [selectedLocation, setSelectedLocation] = useState();
 
+  const { lng, lat } = route.params;
+
   const region = {
-    latitude: 39.916668,
-    longitude: 116.383331,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitude: lat,
+    longitude: lng,
+    latitudeDelta: 0.0232,
+    longitudeDelta: 0.0121,
   };
 
   function selectLocationHandler(event) {
