@@ -1,6 +1,6 @@
 const GAODE_API_KEY = "32c78d0a7d52df3405373a887b33b541";
 
-export function getMapPreview(lng, lat) {
+export function getMapPreview(lat, lng) {
   const imagePreviewUrl = `https://restapi.amap.com/v3/staticmap?location=${lng.toFixed(
     6
   )},${lat.toFixed(6)}&zoom=13&size=400*200&markers=mid,,A:${lng.toFixed(
@@ -10,7 +10,7 @@ export function getMapPreview(lng, lat) {
   return imagePreviewUrl;
 }
 
-export async function getAddress(lng, lat) {
+export async function getAddress(lat, lng) {
   const url = `https://restapi.amap.com/v3/geocode/regeo?location=${lng},${lat}&key=${GAODE_API_KEY}&radius=1000&extensions=all`;
   const response = await fetch(url);
   if (!response.ok) {

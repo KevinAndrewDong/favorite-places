@@ -26,7 +26,7 @@ function LocationPicker({ onPickLocation }) {
 
   useEffect(() => {
     if (isFocused && route.params) {
-      const mapPickedLocation = route.params && {
+      const mapPickedLocation = {
         lat: route.params.pickedLat,
         lng: route.params.pickedLng,
       };
@@ -38,8 +38,8 @@ function LocationPicker({ onPickLocation }) {
     async function handleLocation() {
       if (pickedLocation) {
         const address = await getAddress(
-          pickedLocation.lng,
-          pickedLocation.lat
+          pickedLocation.lat,
+          pickedLocation.lng
         );
         onPickLocation({ ...pickedLocation, address: address });
       }
@@ -60,23 +60,24 @@ function LocationPicker({ onPickLocation }) {
     }
     return true;
   }
-
+  //"获取当前位置"按钮
   async function getLocationHandler() {
     const hasPermission = await verifyPermissions();
-    if (!hasPermission) return;
+    if (!hasPermission) {
+      return;
+    }
 
     const location = await getCurrentPositionAsync();
-    //console.log(location);
     setPickedLocation({
-      lng: location.coords.longitude,
       lat: location.coords.latitude,
+      lng: location.coords.longitude,
     });
   }
-
+  //“在地图上选取”按钮
   function pickOnMapHandler() {
     navigation.navigate("Map", {
-      lng: pickedLocation.lng,
-      lat: pickedLocation.lat,
+      initialLat: pickedLocation && pickedLocation.lat,
+      initialLng: pickedLocation && pickedLocation.lng,
     });
   }
 
@@ -85,7 +86,7 @@ function LocationPicker({ onPickLocation }) {
     locationPreview = (
       <Image
         style={styles.image}
-        source={{ uri: getMapPreview(pickedLocation.lng, pickedLocation.lat) }}
+        source={{ uri: getMapPreview(pickedLocation.lat, pickedLocation.lng) }}
       />
     );
   }
