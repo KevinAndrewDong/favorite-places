@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 
 import { Colors } from "../../constants/colors";
-import { deletePlace } from "../../util/database";
 import PlaceItem from "./PlaceItem";
 
 function PlacesList({ places }) {
@@ -15,7 +14,9 @@ function PlacesList({ places }) {
   }
 
   function deletePlaceHandler(id) {
-    deletePlace(id);
+    navigation.navigate("AllPlaces", {
+      placeId: id,
+    });
   }
 
   if (!places || places.length === 0) {

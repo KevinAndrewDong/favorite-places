@@ -8,7 +8,6 @@ function MapForPlaceDetails({ navigation, route }) {
     lat: route.params.initialLat,
     lng: route.params.initialLng,
   };
-  console.log(initialLocation);
 
   const [selectedLocation, setSelectedLocation] = useState(initialLocation);
 

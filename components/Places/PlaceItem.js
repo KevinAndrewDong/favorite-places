@@ -6,7 +6,7 @@ function PlaceItem({ place, onSelect, onDelete }) {
     <Pressable
       style={({ pressed }) => [styles.item, pressed && styles.pressed]}
       onPress={onSelect.bind(this, place.id)}
-      onLongPress={onDelete}
+      onLongPress={onDelete.bind(this, place.id)}
     >
       <Image style={styles.image} source={{ uri: place.imageUri }} />
       <View style={styles.info}>

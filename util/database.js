@@ -96,7 +96,7 @@ export function fetchPlaceDetails(id) {
           const place = new Place(
             dbPlace.title,
             dbPlace.imageUri,
-            { address: dbPlace.address, lat: dbPlace.lat, lng: dbPlace.lng },
+            { lat: dbPlace.lat, lng: dbPlace.lng, address: dbPlace.address },
             dbPlace.id
           );
           resolve(place);
@@ -115,16 +115,10 @@ export function deletePlace(id) {
   const promise = new Promise((resolve, reject) => {
     database.transaction((tx) => {
       tx.executeSql(
-        "DELETE FROM places WHERE id = ?",
+        `DELETE FROM places WHERE id=?`,
         [id],
-        (_, resultSet) => {
-          if (resultSet.rowsAffected > 0) {
-            let newList = this.state.data.filter((data) => {
-              if (data.id === id) return false;
-              else return true;
-            });
-            this.setState({ data: newList });
-          }
+        (_, result) => {
+          resolve(result);
         },
         (_, error) => {
           reject(error);

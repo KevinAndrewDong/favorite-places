@@ -7,6 +7,7 @@ import AddPlace from "./screens/AddPlace";
 import Map from "./screens/Map";
 import PlaceDetails from "./screens/PlaceDetails";
 import MapForPlaceDetails from "./screens/MapForPlaceDetails";
+import DeletePlace from "./screens/DeletePlace";
 
 import IconButton from "./components/UI/IconButton";
 import { Colors } from "./constants/colors";
@@ -71,6 +72,7 @@ export default function App() {
               title: "新增地点",
             }}
           />
+
           <Stack.Screen name="Map" component={Map} />
           <Stack.Screen
             name="PlaceDetails"
@@ -84,6 +86,13 @@ export default function App() {
             component={MapForPlaceDetails}
             options={{
               title: "定位",
+            }}
+          />
+          <Stack.Screen
+            name="DeletePlace"
+            component={DeletePlace}
+            options={{
+              title: "删除",
             }}
           />
         </Stack.Navigator>
