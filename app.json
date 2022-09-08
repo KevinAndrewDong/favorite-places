@@ -18,13 +18,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.andrewfitzdong.doubleCamera"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.andrewfitzdong.doubleCamera"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,6 +41,11 @@
           "cameraPermission": "The app accesses your camera to take photos for you."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "6ef0326a-9bfc-4cee-960f-e0985c4008a7"
+      }
+    }
   }
 }
