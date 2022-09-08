@@ -1,13 +1,13 @@
 
 「现在就拍」是一个旅游留念app，可以拍到当下看到的景色，并获取到所在位置的地名，得到独一无二的回忆。点击可查看详细位置，长按可删除。
 
-[![9bvj7.jpg](https://s1.328888.xyz/2022/09/09/9bvj7.jpg)](https://imgloc.com/i/9bvj7)
+![](https://i.imgur.com/Oie5Kil.jpg)
 
 - use React, JavaScript and React Native components
 
 - navigate , style and animate and in React Native apps
 
-- use third-party libraries in  React Native app
+- use third-party libraries (Ionicons) in  React Native app
 
 - use maps and an image picker
 
