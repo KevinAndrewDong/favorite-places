@@ -1,4 +1,4 @@
-const GAODE_API_KEY = "32c78d0a7d52df3405373a887b33b541";
+const GAODE_API_KEY = "";
 
 export function getMapPreview(lat, lng) {
   const imagePreviewUrl = `https://restapi.amap.com/v3/staticmap?location=${lng.toFixed(
