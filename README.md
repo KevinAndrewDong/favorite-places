@@ -1,6 +1,6 @@
 # favorite-places · 现在就拍
 
-个人 React Native 练习项目：旅游场景留念 App。拍摄当下景色、解析所在位置，在地图上查看与管理收藏地点。
+React Native 移动端应用：记录旅途中的地点与照片，支持定位解析、地图展示与本地持久化。
 
 ![App 截图](https://i.imgur.com/Oie5Kil.jpg)
 
@@ -34,7 +34,7 @@ npm install
 npx expo start
 ```
 
-启动后按终端提示：按 `i` 打开 iOS 模拟器，按 `a` 打开 Android，或扫码用 Expo Go 在真机调试。
+启动后按终端提示：按 `i` 打开 iOS 模拟器，按 `a` 打开 Android，或扫码使用 Expo Go 在真机调试。
 
 > 定位、相机、地图等能力依赖系统权限，首次使用需在设备上授权。
 
@@ -51,20 +51,11 @@ favorite-places
 │   ├── database.js       # SQLite 增删查
 │   └── location.js       # 定位与逆地理
 ├── constants/colors.js
-└── App.js                # 导航栈与 DB 初始化
+└── App.js                # 导航栈与数据库初始化
 ```
 
-## 实现要点（面试可讲）
+## 架构与实现
 
-1. **分层**：`screens` 负责路由页面，`components` 抽业务与 UI，`models` + `util/database` 做数据层，避免页面直接写 SQL。
-2. **启动流程**：`App.js` 中 `init()` 初始化 SQLite，完成后再挂载 `NavigationContainer`，避免读写未就绪的库。
-3. **与 Vue 的对应**：组件化 + 单向数据流与 Vue3 类似；差异在 RN 使用原生模块（相机、地图）而非 DOM，路由由 React Navigation 承担。
-
-## 说明
-
-- 基于 [React Native 实战课程](https://www.udemy.com/course/react-native-the-practical-guide/) 思路完成并自行扩展目录与持久化。
-- 主要面向 **React / React Native 组件模型** 学习；Web 端 React（Vite + 中台）为另一条线，与本仓库互补。
-
-## License
-
-MIT（如需可自行补充 LICENSE 文件）
+- **分层**：`screens` 承载路由页面，`components` 拆分业务与 UI，`models` 与 `util/database` 负责数据访问，页面不直接操作 SQL。
+- **启动**：`App.js` 在挂载导航前调用 `init()` 完成 SQLite 建表，避免未初始化即读写。
+- **数据流**：列表与详情通过本地库同步；新增地点时串联选图、定位、落库与地图回显。
